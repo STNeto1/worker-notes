@@ -8,6 +8,9 @@ dependencies:
   '@libsql/client':
     specifier: ^0.3.6
     version: 0.3.6
+  '@planetscale/database':
+    specifier: ^1.11.0
+    version: 1.11.0
   '@solidjs/meta':
     specifier: ^0.29.1
     version: 0.29.1(solid-js@1.8.5)
@@ -19,7 +22,7 @@ dependencies:
     version: 0.7.1(typescript@4.9.5)(zod@3.22.4)
   drizzle-orm:
     specifier: 0.29.0-0a8127c
-    version: 0.29.0-0a8127c(@cloudflare/workers-types@4.20231025.0)(@libsql/client@0.3.6)
+    version: 0.29.0-0a8127c(@cloudflare/workers-types@4.20231025.0)(@libsql/client@0.3.6)(@planetscale/database@1.11.0)
   solid-js:
     specifier: ^1.8.5
     version: 1.8.5
@@ -1880,6 +1883,11 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
 
+  /@planetscale/database@1.11.0:
+    resolution: {integrity: sha512-aWbU+D/IRHoDE9975y+Q4c+EwwAWxCPwFId+N1AhQVFXzbeJMkj6KN2iQtoi03elcLMRdfT+V3i9Z4WRw+/oIA==}
+    engines: {node: '>=16'}
+    dev: false
+
   /@polka/url@1.0.0-next.23:
     resolution: {integrity: sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==}
 
@@ -2480,7 +2488,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.29.0-0a8127c(@cloudflare/workers-types@4.20231025.0)(@libsql/client@0.3.6):
+  /drizzle-orm@0.29.0-0a8127c(@cloudflare/workers-types@4.20231025.0)(@libsql/client@0.3.6)(@planetscale/database@1.11.0):
     resolution: {integrity: sha512-NeCyeLJKWlzmj07yuCYZ1EYIx8Xe4dnWhNcOcJ7dRa3DE9DvSBubjOf2MnNFHlrcQv/kHH6qM4eVkLrJh4R9bg==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -2544,6 +2552,7 @@ packages:
     dependencies:
       '@cloudflare/workers-types': 4.20231025.0
       '@libsql/client': 0.3.6
+      '@planetscale/database': 1.11.0
     dev: false
 
   /ee-first@1.1.1:

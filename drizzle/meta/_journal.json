@@ -1,12 +1,19 @@
 {
   "version": "5",
-  "dialect": "sqlite",
+  "dialect": "mysql",
   "entries": [
     {
       "idx": 0,
       "version": "5",
-      "when": 1699373830961,
-      "tag": "0000_amusing_marvel_zombies",
+      "when": 1699377674008,
+      "tag": "0000_great_sentinel",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1699378904136,
+      "tag": "0001_moaning_harry_osborn",
       "breakpoints": true
     }
   ]

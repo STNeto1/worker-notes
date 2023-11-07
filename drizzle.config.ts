@@ -4,9 +4,8 @@ import { env } from "~/env/server";
 export default {
   schema: "./src/db/schemas.ts",
   out: "./drizzle",
-  driver: "turso",
+  driver: "mysql2",
   dbCredentials: {
-    url: env.TURSO_DB_URL,
-    authToken: env.TURSO_AUTH_TOKEN,
+    connectionString: env.DATABASE_URL,
   },
 } satisfies Config;

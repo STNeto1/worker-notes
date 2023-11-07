@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "2c186a1a-3a4d-42b3-a706-0915ee1e0ab6",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "ac8b923f-ae85-4ae3-b5d2-4e177e4ed619",
+  "prevId": "2c186a1a-3a4d-42b3-a706-0915ee1e0ab6",
   "tables": {
     "user_key": {
       "name": "user_key",
@@ -30,21 +30,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "user_key_user_id_auth_user_id_fk": {
-          "name": "user_key_user_id_auth_user_id_fk",
-          "tableFrom": "user_key",
-          "tableTo": "auth_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {
         "user_key_id": {
           "name": "user_key_id",
@@ -88,21 +74,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "user_session_user_id_auth_user_id_fk": {
-          "name": "user_session_user_id_auth_user_id_fk",
-          "tableFrom": "user_session",
-          "tableTo": "auth_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {
         "user_session_id": {
           "name": "user_session_id",
