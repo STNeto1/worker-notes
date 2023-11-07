@@ -1,15 +1,15 @@
 import { For, Show, Suspense } from "solid-js";
 import { Title, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
-import { getConnectionUrl } from "~/lib/getConn";
+import { user } from "~/db/schemas";
+import { getConnection } from "~/lib/getConn";
 
 export function routeData() {
   return createServerData$(async (_, ctx) => {
-    // const $users = await db.select().from(user);
-    console.log(getConnectionUrl(ctx.env));
+    const $users = await getConnection(ctx.env).select().from(user);
 
     return {
-      users: [],
+      users: $users,
     };
   });
 }

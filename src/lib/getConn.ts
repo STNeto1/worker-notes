@@ -1,10 +1,13 @@
+import { connect } from "@planetscale/database";
+import { drizzle } from "drizzle-orm/planetscale-serverless";
+
 declare global {
   interface Env {
     DATABASE_URL: string;
   }
 }
 
-export const getConnectionUrl = (env: Env) => {
+const getConnectionUrl = (env: Env) => {
   if (env.DATABASE_URL) {
     return env.DATABASE_URL;
   }
@@ -14,4 +17,14 @@ export const getConnectionUrl = (env: Env) => {
   }
 
   throw new Error("DATABASE_URL is not set");
+};
+
+export const getConnection = (env: Env) => {
+  const connection = connect({
+    url: getConnectionUrl(env),
+  });
+
+  return drizzle(connection, {
+    logger: true,
+  });
 };
