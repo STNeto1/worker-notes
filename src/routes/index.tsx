@@ -30,7 +30,7 @@ export default function Home() {
         </Show>
 
         <Show when={!data()?.users?.length}>
-          <div>No users found</div>
+          <div>No users found!</div>
         </Show>
       </Suspense>
     </main>
