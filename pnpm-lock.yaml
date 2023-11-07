@@ -18,8 +18,8 @@ dependencies:
     specifier: ^0.7.1
     version: 0.7.1(typescript@4.9.5)(zod@3.22.4)
   drizzle-orm:
-    specifier: ^0.28.6
-    version: 0.28.6(@cloudflare/workers-types@4.20231025.0)(@libsql/client@0.3.6)
+    specifier: 0.29.0-0a8127c
+    version: 0.29.0-0a8127c(@cloudflare/workers-types@4.20231025.0)(@libsql/client@0.3.6)
   solid-js:
     specifier: ^1.8.5
     version: 1.8.5
@@ -2480,8 +2480,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.28.6(@cloudflare/workers-types@4.20231025.0)(@libsql/client@0.3.6):
-    resolution: {integrity: sha512-yBe+F9htrlYER7uXgDJUQsTHFoIrI5yMm5A0bg0GiZ/kY5jNXTWoEy4KQtg35cE27sw1VbgzoMWHAgCckUUUww==}
+  /drizzle-orm@0.29.0-0a8127c(@cloudflare/workers-types@4.20231025.0)(@libsql/client@0.3.6):
+    resolution: {integrity: sha512-NeCyeLJKWlzmj07yuCYZ1EYIx8Xe4dnWhNcOcJ7dRa3DE9DvSBubjOf2MnNFHlrcQv/kHH6qM4eVkLrJh4R9bg==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
