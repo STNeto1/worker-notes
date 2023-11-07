@@ -1,8 +1,6 @@
 import { For, Show, Suspense } from "solid-js";
 import { Title, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
-import { db } from "~/db/connections";
-import { user } from "~/db/schemas";
 
 export function routeData() {
   return createServerData$(async (_, ctx) => {
