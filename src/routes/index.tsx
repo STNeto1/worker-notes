@@ -5,9 +5,7 @@ import { db } from "~/db/connections";
 import { user } from "~/db/schemas";
 
 export function routeData() {
-  return createServerData$(async (_, {}) => {
-    const $users = await db.select().from(user);
-
+  return createServerData$(async (_, params) => {
     return {
       users: [],
     };
