@@ -22,6 +22,10 @@ const getConnectionUrl = (env: Env) => {
 export const getConnection = (env: Env) => {
   const connection = connect({
     url: getConnectionUrl(env),
+    fetch: (url: string, init: RequestInit<RequestInitCfProperties>) => {
+      delete (init as any)["cache"]; // Remove cache header
+      return fetch(url, init);
+    },
   });
 
   return drizzle(connection, {
