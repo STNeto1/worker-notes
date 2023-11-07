@@ -9,7 +9,6 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20231025.0",
     "@types/node": "^18.17.5",
-    "better-sqlite3": "^9.0.0",
     "drizzle-kit": "^0.19.13",
     "esbuild": "^0.14.54",
     "postcss": "^8.4.28",
