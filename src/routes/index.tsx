@@ -5,7 +5,8 @@ import { createServerData$ } from "solid-start/server";
 export function routeData() {
   return createServerData$(async (_, ctx) => {
     // const $users = await db.select().from(user);
-    console.log(JSON.stringify(ctx, null, 2));
+    // @ts-ignore
+    console.log(ctx.env.DATABASE_URL ?? "no database url");
 
     return {
       users: [],
