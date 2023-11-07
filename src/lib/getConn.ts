@@ -7,21 +7,22 @@ declare global {
   }
 }
 
-const getConnectionUrl = (env: Env) => {
-  if (env.DATABASE_URL) {
-    return env.DATABASE_URL;
+const getEnvValue = (env: Env, key: keyof Env = "DATABASE_URL"): string => {
+  if (env[key]) {
+    return env[key] as string;
   }
 
-  if (process.env.DATABASE_URL) {
-    return process.env.DATABASE_URL;
+  if (process.env[key]) {
+    return process.env[key] as string;
   }
 
-  throw new Error("DATABASE_URL is not set");
+  throw new Error(`Missing environment variable: ${key}`);
 };
 
 export const getConnection = (env: Env) => {
   const connection = connect({
-    url: getConnectionUrl(env),
+    url: getEnvValue(env, "DATABASE_URL"),
+    // @ts-ignore
     fetch: (url: string, init: RequestInit<RequestInitCfProperties>) => {
       delete (init as any)["cache"]; // Remove cache header
       return fetch(url, init);
