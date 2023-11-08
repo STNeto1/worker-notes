@@ -15,6 +15,13 @@
       "when": 1699378904136,
       "tag": "0001_moaning_harry_osborn",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1699403054309,
+      "tag": "0002_whole_malice",
+      "breakpoints": true
     }
   ]
 }

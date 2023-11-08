@@ -7,8 +7,11 @@ declare global {
   }
 }
 
-const getEnvValue = (env: Env, key: keyof Env = "DATABASE_URL"): string => {
-  if (env[key]) {
+export const getEnvValue = (
+  env: Env | null,
+  key: keyof Env = "DATABASE_URL",
+): string => {
+  if (!!env && env[key]) {
     return env[key] as string;
   }
 

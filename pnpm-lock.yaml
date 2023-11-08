@@ -8,6 +8,12 @@ dependencies:
   '@libsql/client':
     specifier: ^0.3.6
     version: 0.3.6
+  '@lucia-auth/adapter-mysql':
+    specifier: ^2.1.0
+    version: 2.1.0(@planetscale/database@1.11.0)(lucia@2.7.3)
+  '@lucia-auth/oauth':
+    specifier: ^3.4.0
+    version: 3.4.0(lucia@2.7.3)
   '@planetscale/database':
     specifier: ^1.11.0
     version: 1.11.0
@@ -23,6 +29,9 @@ dependencies:
   drizzle-orm:
     specifier: 0.29.0-0a8127c
     version: 0.29.0-0a8127c(@cloudflare/workers-types@4.20231025.0)(@libsql/client@0.3.6)(@planetscale/database@1.11.0)
+  lucia:
+    specifier: ^2.7.3
+    version: 2.7.3
   solid-js:
     specifier: ^1.8.5
     version: 1.8.5
@@ -1896,6 +1905,30 @@ packages:
     dev: false
     optional: true
 
+  /@lucia-auth/adapter-mysql@2.1.0(@planetscale/database@1.11.0)(lucia@2.7.3):
+    resolution: {integrity: sha512-LkqsJHQS9KuMs+cTJQJnaqb6obqMyJfblyyLM0Ogoimzikb5orbkWI0C8eY3Supr60bgP4PYuQxYZm8xxera0Q==}
+    peerDependencies:
+      '@planetscale/database': ^1.0.0
+      lucia: ^2.0.0
+      mysql2: ^3.0.0
+    peerDependenciesMeta:
+      '@planetscale/database':
+        optional: true
+      mysql2:
+        optional: true
+    dependencies:
+      '@planetscale/database': 1.11.0
+      lucia: 2.7.3
+    dev: false
+
+  /@lucia-auth/oauth@3.4.0(lucia@2.7.3):
+    resolution: {integrity: sha512-3W4TaCiyUViXK2e2+VJo5324agvYz3102I2YKIttkGDKcevaNpLG3LgiR2rbemyF5UXFKiHgfFvRtKs/KDa9kw==}
+    peerDependencies:
+      lucia: ^2.0.0
+    dependencies:
+      lucia: 2.7.3
+    dev: false
+
   /@miniflare/cache@2.14.1:
     resolution: {integrity: sha512-f/o6UBV6UX+MlhjcEch73/wjQvvNo37dgYmP6Pn2ax1/mEHhJ7allNAqenmonT4djNeyB3eEYV3zUl54wCEwrg==}
     engines: {node: '>=16.13'}
@@ -2052,6 +2085,11 @@ packages:
 
   /@neon-rs/load@0.0.4:
     resolution: {integrity: sha512-kTPhdZyTQxB+2wpiRcFWrDcejc4JI6tkPuS7UZCG4l6Zvc5kU/gGQ/ozvHTh1XR5tS+UlfAfGuPajjzQjCiHCw==}
+    dev: false
+
+  /@noble/hashes@1.3.2:
+    resolution: {integrity: sha512-MVC8EAQp7MvEcm30KWENFjgR+Mkmf+D189XJTkFIlwohU5hcBbn1ZkKq7KVTi2Hme3PMGF390DaL52beVrIihQ==}
+    engines: {node: '>= 16'}
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
@@ -3349,6 +3387,13 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
+  /lucia@2.7.3:
+    resolution: {integrity: sha512-fzwwsZcijdQmS116J2odQZj/fb8SYXUI2rRWz84gZqkbpX9QAS4m72qlFzsPDv1YXJHNRhYUQCvQl3EKgt3OgA==}
+    dependencies:
+      '@noble/hashes': 1.3.2
+      nanoid: 5.0.1
+    dev: false
+
   /magic-string@0.27.0:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
     engines: {node: '>=12'}
@@ -3493,6 +3538,12 @@ packages:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid@5.0.1:
+    resolution: {integrity: sha512-vWeVtV5Cw68aML/QaZvqN/3QQXc6fBfIieAlu05m7FZW2Dgb+3f0xc0TTxuJW+7u30t7iSDTV/j3kVI0oJqIfQ==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    dev: false
 
   /negotiator@0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
