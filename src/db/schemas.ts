@@ -1,4 +1,11 @@
-import { mysqlTable, bigint, varchar } from "drizzle-orm/mysql-core";
+import {
+  mysqlTable,
+  bigint,
+  varchar,
+  text,
+  timestamp,
+} from "drizzle-orm/mysql-core";
+import { ulid } from "ulid";
 
 export const user = mysqlTable("auth_user", {
   id: varchar("id", {
@@ -34,4 +41,20 @@ export const session = mysqlTable("user_session", {
   idleExpires: bigint("idle_expires", {
     mode: "number",
   }).notNull(),
+});
+
+export const notes = mysqlTable("user_notes", {
+  id: varchar("id", {
+    length: 26,
+  })
+    .primaryKey()
+    .$defaultFn(() => ulid()),
+  userId: varchar("user_id", {
+    length: 15,
+  }).notNull(),
+  title: varchar("title", {
+    length: 255,
+  }).notNull(),
+  note: text("note", {}).notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
 });

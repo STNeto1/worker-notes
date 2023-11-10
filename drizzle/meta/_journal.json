@@ -22,6 +22,20 @@
       "when": 1699403054309,
       "tag": "0002_whole_malice",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1699640082255,
+      "tag": "0003_fearless_owl",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1699640746667,
+      "tag": "0004_tough_swarm",
+      "breakpoints": true
     }
   ]
 }
