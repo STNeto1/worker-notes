@@ -6,11 +6,11 @@ import {
   redirect,
 } from "solid-start/server";
 import { z } from "zod";
-import { ulid } from "ulid";
 import { notes, user } from "~/db/schemas";
 import { useUser } from "~/hooks/useUser";
 import { extractFormData } from "~/lib/formData";
 import { getConnection } from "~/lib/getConn";
+import { A } from "@solidjs/router";
 
 export function routeData() {
   const user = createServerData$(
@@ -125,9 +125,12 @@ export default function Home() {
       <Suspense fallback={<div>Loading notes...</div>}>
         <For each={data?.notes()}>
           {(note) => (
-            <div>
+            <div
+              style={{ display: "flex", "align-items": "center", gap: "2rem" }}
+            >
               <h2>{note.title}</h2>
               <p>{note.note}</p>
+              <A href={`/${note.id}`}>Access</A>
             </div>
           )}
         </For>
