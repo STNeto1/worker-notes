@@ -1,18 +1,13 @@
 import { Suspense } from "solid-js";
-import { FormError, RouteDataArgs, Title, useRouteData } from "solid-start";
-import {
-  createServerAction$,
-  createServerData$,
-  redirect,
-} from "solid-start/server";
+import { RouteDataArgs, Title, useRouteData } from "solid-start";
+import { createServerData$, redirect } from "solid-start/server";
 import { z } from "zod";
 import { notes } from "~/db/schemas";
 import { useUser } from "~/hooks/useUser";
 import { getConnection } from "~/lib/getConn";
 import { and, eq } from "drizzle-orm";
 import { A } from "@solidjs/router";
-import { extractFormData } from "~/lib/formData";
-import { deleteNote } from "~/db/functions";
+import { useDeleteNote } from "~/hooks/useDeleteComponent";
 
 export function routeData(args: RouteDataArgs) {
   const validPathParams = args.location.pathname
@@ -61,42 +56,10 @@ const schema = z.object({
   note: z.string().min(1),
 });
 
-export const deleteSchema = z.object({
-  id: z.string().ulid("ID is not valid"),
-});
-
 export default function Note() {
   const data = useRouteData<typeof routeData>();
 
-  const [deleting, { Form }] = createServerAction$(
-    async (formData: FormData, ctx) => {
-      const sessionUser = await useUser(ctx.request);
-      if (!sessionUser) {
-        throw redirect("/sign-in");
-      }
-
-      const data = extractFormData(formData);
-      const parseResult = deleteSchema.safeParse(data);
-      if (!parseResult.success) {
-        throw new FormError("Invalid form data");
-      }
-
-      const result = await deleteNote(
-        ctx.env,
-        sessionUser,
-        parseResult.data.id,
-      );
-
-      if (result.rowsAffected !== 1) {
-        throw new FormError("Failed to delete note");
-      }
-
-      throw redirect("/");
-    },
-    {
-      invalidate: "notes",
-    },
-  );
+  const [deleting, { Form }] = useDeleteNote();
 
   return (
     <main>
@@ -112,6 +75,7 @@ export default function Note() {
 
           <Form>
             <input type="hidden" name="id" value={data?.note()?.id} />
+            <input type="hidden" name="redirect" value={"/"} />
 
             <button type="submit" disabled={deleting.pending}>
               Delete

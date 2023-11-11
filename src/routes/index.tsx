@@ -11,8 +11,8 @@ import { useUser } from "~/hooks/useUser";
 import { extractFormData } from "~/lib/formData";
 import { getConnection } from "~/lib/getConn";
 import { A } from "@solidjs/router";
-import { deleteNote, getNotes } from "~/db/functions";
-import { deleteSchema } from "./[id]";
+import { getNotes } from "~/db/functions";
+import { useDeleteNote } from "~/hooks/useDeleteComponent";
 
 export function routeData() {
   // const user = createServerData$(
@@ -88,35 +88,7 @@ export default function Home() {
     },
   );
 
-  const [deleting, { Form: DeleteForm }] = createServerAction$(
-    async (formData: FormData, ctx) => {
-      const sessionUser = await useUser(ctx.request);
-      if (!sessionUser) {
-        throw redirect("/sign-in");
-      }
-
-      const data = extractFormData(formData);
-      const parseResult = deleteSchema.safeParse(data);
-      if (!parseResult.success) {
-        throw new FormError("Invalid form data");
-      }
-
-      const result = await deleteNote(
-        ctx.env,
-        sessionUser,
-        parseResult.data.id,
-      );
-
-      if (result.rowsAffected !== 1) {
-        throw new FormError("Failed to delete note");
-      }
-
-      return true;
-    },
-    {
-      invalidate: "notes",
-    },
-  );
+  const [deleting, { Form: DeleteForm }] = useDeleteNote();
 
   createEffect(() => {
     if (creating.result && titleRef && noteRef) {
