@@ -6,26 +6,28 @@ import {
   redirect,
 } from "solid-start/server";
 import { z } from "zod";
-import { notes, user } from "~/db/schemas";
+import { notes } from "~/db/schemas";
 import { useUser } from "~/hooks/useUser";
 import { extractFormData } from "~/lib/formData";
 import { getConnection } from "~/lib/getConn";
 import { A } from "@solidjs/router";
+import { deleteNote, getNotes } from "~/db/functions";
+import { deleteSchema } from "./[id]";
 
 export function routeData() {
-  const user = createServerData$(
-    async (_, ctx) => {
-      const sessionUser = await useUser(ctx.request);
-      if (!sessionUser) {
-        throw redirect("/sign-in");
-      }
-
-      return sessionUser;
-    },
-    {
-      key: "user",
-    },
-  );
+  // const user = createServerData$(
+  //   async (_, ctx) => {
+  //     const sessionUser = await useUser(ctx.request);
+  //     if (!sessionUser) {
+  //       throw redirect("/sign-in");
+  //     }
+  //
+  //     return sessionUser;
+  //   },
+  //   {
+  //     key: "user",
+  //   },
+  // );
 
   const $notes = createServerData$(
     async (_, ctx) => {
@@ -34,7 +36,7 @@ export function routeData() {
         throw redirect("/sign-in");
       }
 
-      return getConnection(ctx.env).select().from(notes);
+      return getNotes(ctx.env, sessionUser);
     },
     {
       key: "notes",
@@ -42,7 +44,6 @@ export function routeData() {
   );
 
   return {
-    user,
     notes: $notes,
   };
 }
@@ -83,7 +84,37 @@ export default function Home() {
       return true;
     },
     {
-      invalidate: ["notes"],
+      invalidate: "notes",
+    },
+  );
+
+  const [deleting, { Form: DeleteForm }] = createServerAction$(
+    async (formData: FormData, ctx) => {
+      const sessionUser = await useUser(ctx.request);
+      if (!sessionUser) {
+        throw redirect("/sign-in");
+      }
+
+      const data = extractFormData(formData);
+      const parseResult = deleteSchema.safeParse(data);
+      if (!parseResult.success) {
+        throw new FormError("Invalid form data");
+      }
+
+      const result = await deleteNote(
+        ctx.env,
+        sessionUser,
+        parseResult.data.id,
+      );
+
+      if (result.rowsAffected !== 1) {
+        throw new FormError("Failed to delete note");
+      }
+
+      return true;
+    },
+    {
+      invalidate: "notes",
     },
   );
 
@@ -98,10 +129,6 @@ export default function Home() {
     <main>
       <Title>Notes</Title>
       <h1>Notes App!</h1>
-
-      <Suspense fallback={<div>Loading profile...</div>}>
-        <pre>{JSON.stringify(data?.user(), null, 2)}</pre>
-      </Suspense>
 
       <hr />
 
@@ -131,6 +158,14 @@ export default function Home() {
               <h2>{note.title}</h2>
               <p>{note.note}</p>
               <A href={`/${note.id}`}>Access</A>
+
+              <DeleteForm>
+                <input type="hidden" name="id" value={note.id} />
+
+                <button type="submit" disabled={deleting.pending}>
+                  Delete
+                </button>
+              </DeleteForm>
             </div>
           )}
         </For>
